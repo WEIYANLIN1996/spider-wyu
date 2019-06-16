@@ -3,7 +3,7 @@
 -----
 *查成绩：<br>
 
-![image](https://github.com/WEIYANLIN1996/spider-wyu/images/360截图20190616110033666.jpg)
+![image](https://github.com/WEIYANLIN1996/spider-wyu/blob/master/images/360截图20190616110033666.jpg)
 
-*微信课表提醒
-![image](https://github.com/WEIYANLIN1996/spider-wyu/images/webwxgetmsgimg.jpg)
+*微信课表提醒<br>
+![image](https://github.com/WEIYANLIN1996/spider-wyu/blob/master/images/webwxgetmsgimg.jpg)

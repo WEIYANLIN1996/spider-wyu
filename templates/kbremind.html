@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>微信课表提醒</title>
+		<link rel="stylesheet" href="http://127.0.0.1:8080/static/css/bootstrap.min.css" />
+		<script type="text/javascript" src="http://127.0.0.1:8080/static/js/jquery-3.3.1.min.js" ></script>
+	</head>
+	<body>
+		<body style="background-color:#80FFFF ;">
+		<div class="container">
+			<div class='center container'>
+                <div style="width: 100%;height: 100;text-align: center;line-height: 150px;font-size: 40px;color:white">课表提醒</div>
+				<form role="form" onsubmit="return checkForm()">					
+					<div class="form-group">
+					    <label for="name">学号</label>
+					    <input type="text" class="form-control" id="xh" placeholder="请输入学号">
+					</div>
+					<div class="form-group">
+					     <label for="name">sekey</label>
+					    <input type="text" class="form-control" id="sekey" placeholder="请输入server酱密钥">
+					</div>
+				  <button type="submit" id="kq" class="btn btn-primary btn-lg btn-block">开启提醒</button>
+				  <button type="submit" id="gb" class="btn btn-primary btn-lg btn-block">关闭提醒</button>
+				</form>
+            </div>
+			<div>说明：微信课表提醒开启首先要获取课表，然后输入学号，server酱sekey方可开启，开启成功微信会收到信息</div>
+		</div>
+		<script>
+			$(document).ready(function(){
+				$("#kq").click(function(){
+					var xh=$("#xh").val();
+					var sekey=$("#sekey").val();
+				    $.get("remindkq?xh="+xh+"&sekey="+sekey+"&info=kq", function(data,status){
+				        console.log(data.error);
+				        //if(data.error==0){
+				        //	alert("开启成功，请查看微信是否接收消息");
+				        //}
+				        //else{
+				        //	alert("开启失败！");
+				        //}
+				    });
+				    alert("开启成功，请查看微信是否接收消息");
+				});
+			});
+		</script>
+	</body>
+	<script>		
+		function checkForm(){
+			var schoolid=$('#xh').val();
+			var pwd=$('#mm').val();
+			var yzm=$('#yzm').val();
+			if(schoolid==''){
+				alert("学号不能为空！");
+				return false;
+				
+			}
+			if(schoolid.length!=10){
+				alert("学号格式不正确！");
+				return false;
+			}
+			if(pwd==''){
+				alert("密码不能为空！");
+				return false;
+			}
+			if(yzm==''){
+				alert("验证码不能为空！");
+				return false;
+			}
+			else{
+				return ture;
+				
+			}
+			    
+		}	
+	</script>
+</html>

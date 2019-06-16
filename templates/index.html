@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>成绩</title>
+		<link rel="stylesheet" href="static/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="static/css/chengji.css" />
+		<link rel="shortcut icon" href="static/img/m.ico" />
+		<script type="text/javascript" src="static/js/jquery-3.3.1.min.js" ></script>
+		<script type="text/javascript" src="static/js/math.js" ></script>
+	</head>
+	<script>
+		$(document).ready(function(){
+			$("#post").click(function(){
+				  $.post("http://127.0.0.1:8000/getcj",
+				  {
+					date:"Donald Duck",
+					city:"Duckburg"
+				  },
+				  function(data,status){
+					alert("success");
+				  });
+			});
+		});
+	</script>
+
+	<body>	
+	    <div class="container">
+	    	<div class="row">
+	    		<button type="button" id="post" class="btn btn-primary col-sm-4 newbtn">查询</button>
+				<div class="dropdown newmenu">
+					<button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">2018-2019-1
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<li role="presentation">2016-2017-1</li>
+						
+						<li role="presentation">2016-2017-2	</li>
+						
+						<li role="presentation">2017-2018-1</li>
+						
+						<li role="presentation">2017-2018-2	</li>
+					</ul>
+				</div>
+	    					
+	        </div>
+	    </div>
+        <div class="chengji">
+        	<ul  class="list-group">
+        		<li class="list-group-item">课程名称<span class="xf" >学分</span><span class="badge cj" >成绩</span></li>
+				{% for j in rows %}
+				     <li class="list-group-item"><input name="checkbox2" type="checkbox" >{{j.kcmc}}</input><span class="badge kb" >{{j.xdfsmc}}</span><span class="xf1" >{{j.xf}}</span><span class="badge cj1" >{{j.zcj}}</span></li>
+				{% endfor %}
+
+        	</ul>
+        </div>
+        <div id="menu" class="menu">
+		    <div id="one" class="subMenu text-center" data-src="charger.html">
+		        <img class="menu_img"src="static/img/jd.jpg" data-imgname="my"/>
+		        <div class="menu_name">绩点:{{jd}}</div>
+		    </div>
+		    <div id="two" class="subMenu text-center">
+		        <img class="menu_img" src="static/img/pq.jpg"/>
+		        <div class="menu_name">欢迎：{{user}}</div>
+		    </div>
+		    <div id="three" class="subMenu text-center" data-src="personal.html">
+		        <img class="menu_img" src="static/img/js.jpg"/>
+		        <div class="menu_name"><a href="{{gxfurl}}" target="_blank" style=" text-decoration:none">学分获取情况</a></div>
+		    </div>
+		</div>		
+	</body>
+</html>

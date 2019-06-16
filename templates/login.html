@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>成绩查询</title>
+		<link rel="stylesheet" href="static/css/bootstrap.min.css" />
+		<link rel="shortcut icon" href="static/img/m.ico" />
+		<script type="text/javascript" src="static/js/jquery-3.3.1.min.js" ></script>
+	</head>
+	<style>
+		.center{
+			width: 80%;
+			height: auto;
+			margin: auto;
+			margin-top:100px;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+		     var yzmip=document.getElementById('yz');
+		     yzmip.value=string({{yzm}});
+
+		}
+	</script>
+	<script>
+	function checkForm(){
+		var schoolid=$('#xh').val();
+		var pwd=$('#mm').val();
+		var yzm=$('#yzm').val();
+		if(schoolid==''){
+			alert("学号不能为空！");
+			return false;
+
+		}
+		if(schoolid.length!=10){
+			alert("学号格式不正确！");
+			return false;
+		}
+		if(pwd==''){
+			alert("密码不能为空！");
+			return false;
+		}
+		if(yzm==''){
+			alert("验证码不能为空！");
+			return false;
+		}
+		else{
+			return ture;
+		}
+
+	}
+	</script>
+	<body style="background-color: #f9f9f9;">
+		<div class="container">
+			<div class='center container'>
+				<img src="static/img/wyu.jpg" style="margin:auto;border: 0px;height: 150px;width:90% ;">
+				<form role="form" action="http://127.0.0.1:8080" method="post" onsubmit="return checkForm()">
+					{% csrf_token %}
+					<div class="form-group">
+					    <label for="name">学号</label>
+					    <input type="text" class="form-control" id="xh" name="schoolid" placeholder="请输入学号">
+					</div>
+					<div class="form-group">
+					     <label for="name">密码</label>
+					    <input type="password" class="form-control" id="mm" name="psw" placeholder="请输入密码">
+					</div>
+					<div class="form-group row"><input type="text" class="form-control col-sm-5 "  id="yz" name="yzm" value="{{yzm}}" style="margin-left:14px" placeholder="请输入验证码">
+					    <img src="static/img/code.jpg" class="form-control col-sm-3 " style="margin-left:10px;border: 2px;margin-top:0px"/>
+					</div>
+					<input type="hidden" class="form-control col-sm-5 " name="cookie" style="margin-left:14px" value="{{cookie}}">
+	
+				  <button type="submit" class="btn btn-primary btn-lg btn-block">查询</button>
+				</form>
+            </div>
+			
+		</div>
+	</body>
+</html>

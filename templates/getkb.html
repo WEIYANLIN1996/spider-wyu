@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>课表获取</title>
+		<link rel="stylesheet" href="static/css/bootstrap.min.css" />
+		<link rel="shortcut icon" href="static/img/m.ico" />
+		<script type="text/javascript" src="static/js/jquery-3.3.1.min.js" ></script>
+	</head>
+	<style>
+		.center{
+			width: 80%;
+			height: auto;
+			margin: auto;
+			margin-top:100px;
+		}
+	</style>
+	<script>
+		
+	function checkForm(){
+		var schoolid=$('#xh').val();
+		var pwd=$('#mm').val();
+		var yzm=$('#yzm').val();
+		if(schoolid==''){
+			alert("学号不能为空！");
+			return false;
+			
+		}
+		if(schoolid.length!=10){
+			alert("学号格式不正确！");
+			return false;
+		}
+		if(pwd==''){
+			alert("密码不能为空！");
+			return false;
+		}
+		if(yzm==''){
+			alert("验证码不能为空！");
+			return false;
+		}
+		else{
+			return ture;
+			
+		}
+		    
+	}	
+	</script>
+	<body style="background-color:#97CBFF;">
+		<div class="container">
+			<div class='center container'>
+				<form role="form" onsubmit="return checkForm()" action="http://127.0.0.1:8080/kbtx/getkb" method="post">
+					{% csrf_token %}
+					<div class="form-group">
+					    <label for="name">学号</label>
+					    <input type="text" class="form-control" name="xh" placeholder="请输入学号">
+					</div>
+					<div class="form-group">
+					     <label for="name">密码</label>
+					    <input type="password" class="form-control" name="pass" placeholder="请输入密码">
+					</div>
+					<div class="form-group row">				    
+					    <input type="text" class="form-control col-sm-5 " name="yzm" style="margin-left:14px" value="{{yzm}}" placeholder="请输入验证码">
+					    <img src="static/img/code.jpg" class="form-control col-sm-3 " style="margin-left:10px;border: 2px;margin-top:0px"/>
+					</div>
+					<input type="hidden" class="form-control col-sm-5 " name="cookie" style="margin-left:14px" value="{{cookie}}">
+				  <button type="submit"  class="btn btn-primary btn-lg btn-block">获取课表</button>
+				</form>
+           </div>			
+		</div>
+		<script>
+			//$(document).ready(function(){
+				$(".btn11").click(function(){
+					var xh=$("#xh").val();
+					var pass=$("#mm").val();
+					var yzm=$("#yzm").val();
+					console.log(xh);
+				    $.get("kbtx/getkb?xh="+xh+"&pass="+pass+"&yzm="+yzm, function(data,status){
+				        console.log(data.error);
+				        if(data.error==0){
+				        	alert("课表获取成功！");
+				        	window.location.href="http://127.0.0.1:8080/kbtx/remindgb";
+				        }
+				        if(data.error==1){
+				        	alert("课表获取失败！");
+				        }
+				    });
+				});
+			    
+			});
+		</script>
+	</body>
+</html>
+
